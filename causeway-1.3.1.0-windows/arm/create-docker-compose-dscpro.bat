@@ -13,7 +13,7 @@ cd ..
 del docker-compose.yml
 echo services:>>docker-compose.yml
 echo   typedb:>>docker-compose.yml
-echo     image: harbor.fliite.systems/geminos/typedb:latest>>docker-compose.yml
+echo     image: public.ecr.aws/r5d0x2q7/typedb:arm>>docker-compose.yml
 echo     container_name: typedb>>docker-compose.yml
 echo     volumes:>>docker-compose.yml
 echo       - "geminos:/data/typedb:rw">>docker-compose.yml
@@ -25,7 +25,7 @@ echo     ports:>>docker-compose.yml
 echo       - "1729:1729">>docker-compose.yml
 echo     restart: always>>docker-compose.yml
 echo   causewaygui:>>docker-compose.yml
-echo     image: harbor.fliite.systems/geminos/causewaygui:1.3.1.0>>docker-compose.yml
+echo     image: public.ecr.aws/r5d0x2q7/causewaygui:dscpro>>docker-compose.yml
 echo     container_name: "causewaygui">>docker-compose.yml
 echo     volumes:>>docker-compose.yml
 echo       - "geminos:/data:rw">>docker-compose.yml
@@ -40,7 +40,7 @@ echo     depends_on:>>docker-compose.yml
 echo       - "typedb">>docker-compose.yml
 echo     restart: always>>docker-compose.yml
 echo   causewayapi:>>docker-compose.yml
-echo     image: harbor.fliite.systems/geminos/causewayapi:1.3.1.0>>docker-compose.yml
+echo     image: public.ecr.aws/r5d0x2q7/causewayapi:latest>>docker-compose.yml
 echo     container_name: "causewayapi">>docker-compose.yml
 echo     volumes:>>docker-compose.yml
 echo       - "geminos:/data/causal-api-server/geminosnb:rw">>docker-compose.yml

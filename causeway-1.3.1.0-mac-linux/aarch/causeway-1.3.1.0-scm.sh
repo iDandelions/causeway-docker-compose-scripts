@@ -13,7 +13,7 @@ rm docker-compose.yml
 echo version: '"'3'"'>>docker-compose.yml
 echo services:>>docker-compose.yml
 echo -e ' ' typedb:>>docker-compose.yml
-echo -e '  ' image: harbor.fliite.systems/geminos/typedb:latest>>docker-compose.yml
+echo -e '  ' image: public.ecr.aws/r5d0x2q7/typedb:latest>>docker-compose.yml
 echo -e '  ' container_name: typedb>>docker-compose.yml
 echo -e '  ' volumes:>>docker-compose.yml
 echo -e '   ' - geminos:/data/typedb:rw>>docker-compose.yml
@@ -25,7 +25,7 @@ echo -e '  ' ports:>>docker-compose.yml
 echo -e '   ' - "1729:1729">>docker-compose.yml
 echo -e '  ' restart: always>>docker-compose.yml
 echo -e ' ' gui:>>docker-compose.yml
-echo -e '  ' image: harbor.fliite.systems/geminos/causewaygui:1.3.1.0>>docker-compose.yml
+echo -e '  ' image: public.ecr.aws/r5d0x2q7/causewaygui:scm>>docker-compose.yml
 echo -e '  ' container_name: causewaygui>>docker-compose.yml
 echo -e '  ' volumes:>>docker-compose.yml
 echo -e '   ' - geminos:/data:rw>>docker-compose.yml
@@ -40,7 +40,7 @@ echo -e '  ' depends_on:>>docker-compose.yml
 echo -e '   ' - "typedb">>docker-compose.yml
 echo -e '  ' restart: always>>docker-compose.yml
 echo -e ' '  api:>>docker-compose.yml
-echo -e '  ' image: harbor.fliite.systems/geminos/causewayapi:1.3.1.0>>docker-compose.yml
+echo -e '  ' image: public.ecr.aws/r5d0x2q7/causewayapi:latest>>docker-compose.yml
 echo -e '  ' container_name: causewayapi>>docker-compose.yml
 echo -e '  ' volumes:>>docker-compose.yml
 echo -e '   ' - geminos:/data/causal-api-server/geminosnb:rw>>docker-compose.yml
