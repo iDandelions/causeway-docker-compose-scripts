@@ -20,7 +20,7 @@ services:
     volumes:
       - geminos:/root:rw
       - geminos:/data:rw
-      - "/User/yashuaovando/Desktop/causeway/volumes/frontend:/frontend:rw"
+      - "~/causeway/frontend:/frontend:rw"
     ports:
       - "1880:1880"
     depends_on:
@@ -34,7 +34,7 @@ services:
     volumes:
       - geminos:/data:rw
       - geminos:/root:rw
-      - "/User/yashuaovando/Desktop/causeway/volumes/backend:/backend:rw"
+      - "~/causeway/backend:/backend:rw"
     restart: always
     ports:
       - "5001:5001"
@@ -49,7 +49,7 @@ services:
     ports:
       - 8888:8888
     volumes:
-      - "/User/yashuaovando/Desktop/causeway/volumes/backend:/home/jovyan/work:rw"
+      - "~/causeway/backend:/home/jovyan/work:rw"
     depends_on:
       - "typedb"
       - "gui"
