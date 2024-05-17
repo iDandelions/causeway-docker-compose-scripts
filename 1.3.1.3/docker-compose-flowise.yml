@@ -1,17 +1,18 @@
-version: "3"
 services:
   typedb:
-    image: public.ecr.aws/r5d0x2q7/typedb:arm
+    image: public.ecr.aws/r5d0x2q7/typedb:latest
     container_name: typedb
     volumes:
       - geminos:/data/typedb:rw
       - ~/Desktop/causeway/volumes/typedb:/typedb:rw
-    networks:
-      causewaynet:
-        ipv4_address: 172.24.2.1
+    # networks:
+    #   causewaynet:
+    #     ipv4_address: 172.24.2.1
     ports:
       - "1729:1729"
     restart: always
+    extra_hosts: # for linux hosts since version 20.10
+      - host.docker.internal:host-gateway
   gui:
     image: public.ecr.aws/r5d0x2q7/causewaygui:dscpro-flowise
     container_name: "causewaygui"
@@ -19,14 +20,16 @@ services:
       - geminos:/root:rw
       - geminos:/data:rw
       - ~/Desktop/causeway/volumes/frontend:/frontend:rw
-    networks:
-      causewaynet:
-        ipv4_address: 172.24.2.2
+    # networks:
+    #   causewaynet:
+    #     ipv4_address: 172.24.2.2
     ports:
       - "1880:1880"
     depends_on:
       - "typedb"
     restart: always
+    extra_hosts: # for linux hosts since version 20.10
+      - host.docker.internal:host-gateway
   api:
     image: public.ecr.aws/r5d0x2q7/causewayapi:flowise
     container_name: "causewayapi"
@@ -35,21 +38,23 @@ services:
       - geminos:/root:rw
       - ~/Desktop/causeway/volumes/backend:/backend:rw
     restart: always
-    networks:
-      causewaynet:
-        ipv4_address: 172.24.2.3
+    # networks:
+    #   causewaynet:
+    #     ipv4_address: 172.24.2.3
     ports:
       - "5001:5001"
     depends_on:
       - gui
       - typedb
-networks:
-  causewaynet:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: "172.24.2.0/16"
+    extra_hosts: # for linux hosts since version 20.10
+      - host.docker.internal:host-gateway
+# networks:
+#   causewaynet:
+#     driver: bridge
+#     ipam:
+#       driver: default
+#       config:
+#         - subnet: "172.24.2.0/16"
 volumes:
   geminos:
     driver: local

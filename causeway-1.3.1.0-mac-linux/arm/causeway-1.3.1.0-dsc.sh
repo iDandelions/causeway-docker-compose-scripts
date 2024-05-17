@@ -9,7 +9,7 @@ mkdir  frontend
 mkdir  backend
 mkdir  typedb
 cd ..
-rm docker-compose.yml
+rm -f docker-compose.yml
 echo version: '"'3'"'>>docker-compose.yml
 echo services:>>docker-compose.yml
 echo -e ' ' typedb:>>docker-compose.yml

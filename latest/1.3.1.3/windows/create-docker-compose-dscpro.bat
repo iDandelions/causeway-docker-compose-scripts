@@ -25,7 +25,7 @@ echo     ports:>>docker-compose.yml
 echo       - "1729:1729">>docker-compose.yml
 echo     restart: always>>docker-compose.yml
 echo   causewaygui:>>docker-compose.yml
-echo     image: public.ecr.aws/r5d0x2q7/causewaygui:dsc-latest>>docker-compose.yml
+echo     image: public.ecr.aws/r5d0x2q7/causewaygui:dscpro-latest>>docker-compose.yml
 echo     container_name: "causewaygui">>docker-compose.yml
 echo     volumes:>>docker-compose.yml
 echo       - "geminos:/data:rw">>docker-compose.yml
@@ -40,7 +40,7 @@ echo     depends_on:>>docker-compose.yml
 echo       - "typedb">>docker-compose.yml
 echo     restart: always>>docker-compose.yml
 echo   causewayapi:>>docker-compose.yml
-echo     image: public.ecr.aws/r5d0x2q7/causewayapi:1.3.1.2>>docker-compose.yml
+echo     image: public.ecr.aws/r5d0x2q7/causewayapi:latest>>docker-compose.yml
 echo     container_name: "causewayapi">>docker-compose.yml
 echo     volumes:>>docker-compose.yml
 echo       - "geminos:/data/causal-api-server/geminosnb:rw">>docker-compose.yml
@@ -62,7 +62,7 @@ echo     driver: bridge>>docker-compose.yml
 echo     ipam:>>docker-compose.yml
 echo       driver: default>>docker-compose.yml
 echo       config:>>docker-compose.yml
-echo         - subnet: "172.24.2.0/24">>docker-compose.yml
+echo         - subnet: "172.24.2.0/16">>docker-compose.yml
 echo volumes:>>docker-compose.yml
 echo   geminos:>>docker-compose.yml
 echo     driver: local>>docker-compose.yml

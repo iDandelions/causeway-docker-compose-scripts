@@ -1,11 +1,11 @@
-
+version: "3"
 services:
   typedb:
     image: public.ecr.aws/r5d0x2q7/typedb:latest
     container_name: typedb
     volumes:
       - geminos:/data/typedb:rw
-      - ~/Desktop/causeway-docker/volumes/typedb:/typedb:rw
+      - ~/Desktop/causeway/volumes/typedb:/typedb:rw
     networks:
       causewaynet:
         ipv4_address: 172.24.2.1
@@ -13,12 +13,12 @@ services:
       - "1729:1729"
     restart: always
   gui:
-    image: public.ecr.aws/r5d0x2q7/causewaygui:dsc-1.3.1.2
+    image: public.ecr.aws/r5d0x2q7/causewaygui:dsc-latest
     container_name: "causewaygui"
     volumes:
       - geminos:/root:rw
       - geminos:/data:rw
-      - ~/Desktop/causeway-docker/volumes/frontend:/frontend:rw
+      - ~/Desktop/causeway/volumes/frontend:/frontend:rw
     networks:
       causewaynet:
         ipv4_address: 172.24.2.2
@@ -33,7 +33,7 @@ services:
     volumes:
       - geminos:/data:rw
       - geminos:/root:rw
-      - ~/Desktop/causeway-docker/volumes/backend:/backend:rw
+      - ~/Desktop/causeway/volumes/backend:/backend:rw
     restart: always
     networks:
       causewaynet:
