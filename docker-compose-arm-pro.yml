@@ -1,0 +1,63 @@
+# 1.3.1.3
+version: "3"
+services:
+  typedb:
+    # image: public.ecr.aws/r5d0x2q7/typedb:latest  
+    image: public.ecr.aws/r5d0x2q7/typedb:arm #arm machines
+    container_name: typedb
+    volumes:
+      - geminos:/data/typedb:rw
+      - ~/Desktop/causeway/volumes/typedb:/typedb:rw
+    ports:
+      - "1729:1729"
+    restart: always
+    extra_hosts: # for linux hosts since version 20.10
+      - host.docker.internal:host-gateway
+  gui:
+    image: public.ecr.aws/r5d0x2q7/causewaygui:dscpro-latest
+    # image: public.ecr.aws/r5d0x2q7/causewaygui:dsc-latest #uncomment according to version type
+    container_name: "causewaygui"
+    volumes:
+      - geminos:/root:rw
+      - geminos:/data:rw
+      - ~/Desktop/causeway/volumes/frontend:/frontend:rw
+    ports:
+      - "1880:1880"
+    depends_on:
+      - "typedb"
+    restart: always
+    extra_hosts: # for linux hosts since version 20.10
+      - host.docker.internal:host-gateway
+  api:
+    image: public.ecr.aws/r5d0x2q7/causewayapi:latest
+    container_name: "causewayapi"
+    volumes:
+      - geminos:/data:rw
+      - geminos:/root:rw
+      - ~/Desktop/causeway/volumes/backend:/backend:rw
+    restart: always
+    ports:
+      - "5001:5001"
+    depends_on:
+      - gui
+      - typedb
+    extra_hosts: # for linux hosts since version 20.10
+      - host.docker.internal:host-gateway
+  jupyter:
+    image: jupyter/datascience-notebook:latest
+    container_name: jupyter
+    ports:
+      - 8888:8888
+    volumes:
+      - ~/Desktop/causeway/volumes/backend:/home/jovyan/work:rw
+    depends_on:
+      - "typedb"
+      - "gui"
+      - "api"
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+      JUPYTER_TOKEN: "docker"
+    command: "start-notebook.sh --NotebookApp.token='' --NotebookApp.password=''"
+volumes:
+  geminos:
+    driver: local
