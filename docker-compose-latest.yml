@@ -2,8 +2,8 @@
 version: "3"
 services:
   typedb:
-    image: public.ecr.aws/r5d0x2q7/typedb:latest  #arm machines
-    # image: public.ecr.aws/r5d0x2q7/typedb:latest 
+    image: public.ecr.aws/r5d0x2q7/typedb:latest  
+    # image: public.ecr.aws/r5d0x2q7/typedb:arm #arm machines
     container_name: typedb
     volumes:
       - geminos:/data/typedb:rw
@@ -15,7 +15,7 @@ services:
       - host.docker.internal:host-gateway
   gui:
     image: public.ecr.aws/r5d0x2q7/causewaygui:dscpro-latest
-    # image: public.ecr.aws/r5d0x2q7/causewaygui:dsc-latest
+    # image: public.ecr.aws/r5d0x2q7/causewaygui:dsc-latest #uncomment according to version type
     container_name: "causewaygui"
     volumes:
       - geminos:/root:rw
@@ -49,7 +49,7 @@ services:
     ports:
       - 8888:8888
     volumes:
-      - ~/desktop/causeway-docker/volumes/backend:/home/jovyan/work:rw
+      - ~/Desktop/causeway/volumes/backend:/home/jovyan/work:rw
     depends_on:
       - "typedb"
       - "gui"
