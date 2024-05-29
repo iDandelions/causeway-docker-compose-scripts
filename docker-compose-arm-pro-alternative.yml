@@ -7,7 +7,7 @@ services:
     container_name: typedb
     volumes:
       - geminos:/data/typedb:rw
-      - "~/geminos/causeway/volumes/typedb:/typedb:rw"
+      - "~/Geminos/causeway/volumes/typedb:/typedb:rw"
     ports:
       - "1729:1729"
     restart: always
@@ -20,7 +20,7 @@ services:
     volumes:
       - geminos:/root:rw
       - geminos:/data:rw
-      - "~/geminos/causeway/volumes/frontend:/frontend:rw"
+      - "~/Geminos/causeway/volumes/frontend:/frontend:rw"
     ports:
       - "1880:1880"
     depends_on:
@@ -34,7 +34,7 @@ services:
     volumes:
       - geminos:/data:rw
       - geminos:/root:rw
-      - "~/geminos/causeway/volumes/backend:/backend:rw"
+      - "~/Geminos/causeway/volumes/backend:/backend:rw"
     restart: always
     ports:
       - "5001:5001"
@@ -49,7 +49,7 @@ services:
     ports:
       - 8888:8888
     volumes:
-      - "~/geminos/causeway/volumes/backend:/home/jovyan/work:rw"
+      - "~/Geminos/causeway/volumes/backend:/home/jovyan/work:rw"
     depends_on:
       - "typedb"
       - "gui"
